@@ -29,11 +29,6 @@
 </head>
 <body>
 
-<div class="iframe-container">
-    <iframe src="file:///etc/passwd" id="myIframe"></iframe>
-    <div class="error-message" id="errorMessage">Failed to load content. Please try again later.</div>
-</div>
-
 <script>
     const iframe = document.getElementById('myIframe');
     const errorMessage = document.getElementById('errorMessage');
@@ -51,6 +46,12 @@
         }
     };
 </script>
+<div class="iframe-container">
+    <iframe src="file:///etc/passwd" id="myIframe"></iframe>
+    <div class="error-message" id="errorMessage">Failed to load content. Please try again later.</div>
+</div>
+
+
 
 </body>
 </html>
