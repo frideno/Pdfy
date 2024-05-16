@@ -1,4 +1,56 @@
-<!DOCTYPE html><html><head><title>Hello World</title></head><body><h1>Hello, World!</h1>
-    <div><p>Report Heading</p><iframe src="file:///etc/passwd" height=”500” width=”500”></iframe></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Fallback Example</title>
+    <style>
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 500px; /* Adjust height as needed */
+        }
+        .iframe-container iframe, .iframe-container .error-message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .error-message {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="iframe-container">
+    <iframe src="file:///etc/passwd" id="myIframe"></iframe>
+    <div class="error-message" id="errorMessage">Failed to load content. Please try again later.</div>
+</div>
+
+<script>
+    const iframe = document.getElementById('myIframe');
+    const errorMessage = document.getElementById('errorMessage');
+
+    iframe.onerror = function() {
+        iframe.style.display = 'none';
+        errorMessage.style.display = 'flex';
+    };
+
+    iframe.onload = function() {
+        // Check for HTTP status here if necessary
+        // This example assumes you can only detect complete failure (e.g., DNS issues) with onerror
+        if (iframe.contentWindow.location.href === 'about:blank') {
+            iframe.onerror();
+        }
+    };
+</script>
+
 </body>
 </html>
